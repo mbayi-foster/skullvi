@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\CandidatureController;
 use App\Http\Controllers\PosteController;
 use App\Http\Controllers\ProfileController;
@@ -26,6 +27,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::scopeBindings()->group(function () {
+        Route::get('/postes/{poste}/candidatures', [CandidateController::class, 'index'])
+            ->name('postes.candidatures.index');
+        Route::patch('/postes/{poste}/candidatures/{candidate}', [CandidateController::class, 'update'])
+            ->name('postes.candidatures.update');
+    });
 
     Route::resource('postes', PosteController::class);
 });
