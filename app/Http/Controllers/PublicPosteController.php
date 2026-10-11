@@ -8,7 +8,7 @@ use Illuminate\View\View;
 class PublicPosteController extends Controller
 {
     /**
-     * Liste les offres ouvertes aux candidatures.
+     * Affiche l'accueil : présentation du parcours de candidature et offres ouvertes.
      */
     public function index(): View
     {
@@ -17,7 +17,7 @@ class PublicPosteController extends Controller
             ->latest()
             ->paginate(9);
 
-        return view('offres.index', ['postes' => $postes]);
+        return view('home', ['postes' => $postes]);
     }
 
     /**

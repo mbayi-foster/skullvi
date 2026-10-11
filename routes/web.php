@@ -7,21 +7,13 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicPosteController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-// Espace public : consultation des offres et candidature, ouverts à tout visiteur.
-Route::get('/offres', [PublicPosteController::class, 'index'])->name('offres.index');
+// Espace public : l'accueil liste les offres ouvertes et guide le visiteur dans sa candidature.
+Route::get('/', [PublicPosteController::class, 'index'])->name('home');
 Route::get('/offres/{poste}', [PublicPosteController::class, 'show'])->name('offres.show');
 Route::get('/offres/{poste}/postuler', [CandidatureController::class, 'create'])->name('candidatures.create');
 Route::post('/offres/{poste}/postuler', [CandidatureController::class, 'store'])
     ->middleware('throttle:10,1')
     ->name('candidatures.store');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

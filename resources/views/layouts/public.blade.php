@@ -20,12 +20,12 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex h-16 items-center justify-between gap-4">
                         <div class="flex items-center gap-8">
-                            <a href="{{ route('offres.index') }}">
+                            <a href="{{ route('home') }}">
                                 <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                             </a>
 
                             <nav class="flex items-center gap-6">
-                                <a href="{{ route('offres.index') }}"
+                                <a href="{{ route('home') }}"
                                     class="text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
                                     {{ __("Offres d'emploi") }}
                                 </a>
@@ -34,9 +34,9 @@
 
                         <div class="flex items-center gap-3">
                             @auth
-                                <a href="{{ route('dashboard') }}"
+                                <a href="{{ route('postes.index') }}"
                                     class="text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
-                                    {{ __('Tableau de bord') }}
+                                    {{ __('Mes postes') }}
                                 </a>
                             @else
                                 <a href="{{ route('login') }}"

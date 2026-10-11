@@ -62,7 +62,7 @@
             </div>
 
             <div class="flex flex-wrap items-center justify-between gap-4">
-                <a href="{{ route('offres.index') }}" class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:underline">
+                <a href="{{ route('home') }}" class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:underline">
                     &larr; {{ __("Toutes les offres") }}
                 </a>
 
