@@ -5,7 +5,9 @@ namespace App\Models;
 use App\Policies\PostePolicy;
 use Database\Factories\PosteFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Attributes\UsePolicy;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -48,6 +50,15 @@ class Poste extends Model
     public function candidates(): HasMany
     {
         return $this->hasMany(Candidate::class);
+    }
+
+    /**
+     * Limite la requête aux postes ouverts aux candidatures.
+     */
+    #[Scope]
+    protected function actif(Builder $query): Builder
+    {
+        return $query->where('actif', true);
     }
 
     /**

@@ -20,37 +20,13 @@
         <x-input-error class="mt-2" :messages="$errors->get('description')" />
     </div>
 
-    <div
-        x-data="{
-            items: @js($competences),
-            add() {
-                this.items.push('');
-            },
-            remove(index) {
-                this.items.splice(index, 1);
-            },
-        }"
-    >
+    <div>
         <x-input-label :value="__('Compétences requises')" />
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
             {{ __("Au moins une compétence est nécessaire pour qualifier les candidatures.") }}
         </p>
 
-        <div class="mt-2 space-y-2">
-            <template x-for="(item, index) in items" :key="index">
-                <div class="flex items-center gap-2">
-                    <input type="text" :name="`competences_requises[${index}]`" x-model="items[index]"
-                        class="block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                    <x-secondary-button type="button" class="shrink-0" @click="remove(index)" x-show="items.length > 1">
-                        {{ __('Retirer') }}
-                    </x-secondary-button>
-                </div>
-            </template>
-        </div>
-
-        <x-secondary-button type="button" class="mt-2" @click="add()">
-            {{ __('Ajouter une compétence') }}
-        </x-secondary-button>
+        <x-dynamic-list name="competences_requises" :items="$competences" :add-label="__('Ajouter une compétence')" />
 
         <x-input-error class="mt-2" :messages="$errors->get('competences_requises')" />
         @foreach ($errors->get('competences_requises.*') as $messages)
@@ -58,37 +34,13 @@
         @endforeach
     </div>
 
-    <div
-        x-data="{
-            items: @js($langues),
-            add() {
-                this.items.push('');
-            },
-            remove(index) {
-                this.items.splice(index, 1);
-            },
-        }"
-    >
+    <div>
         <x-input-label :value="__('Langues attendues')" />
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
             {{ __("Facultatif : laissez vide si aucune langue particulière n'est exigée.") }}
         </p>
 
-        <div class="mt-2 space-y-2">
-            <template x-for="(item, index) in items" :key="index">
-                <div class="flex items-center gap-2">
-                    <input type="text" :name="`langues_attendues[${index}]`" x-model="items[index]"
-                        class="block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                    <x-secondary-button type="button" class="shrink-0" @click="remove(index)">
-                        {{ __('Retirer') }}
-                    </x-secondary-button>
-                </div>
-            </template>
-        </div>
-
-        <x-secondary-button type="button" class="mt-2" @click="add()">
-            {{ __('Ajouter une langue') }}
-        </x-secondary-button>
+        <x-dynamic-list name="langues_attendues" :items="$langues" :add-label="__('Ajouter une langue')" />
 
         <x-input-error class="mt-2" :messages="$errors->get('langues_attendues')" />
         @foreach ($errors->get('langues_attendues.*') as $messages)

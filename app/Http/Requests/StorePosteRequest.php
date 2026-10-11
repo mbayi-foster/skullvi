@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Requests\Concerns\NormalizesListInput;
 use App\Models\Poste;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -9,6 +10,8 @@ use Illuminate\Validation\Rule;
 
 class StorePosteRequest extends FormRequest
 {
+    use NormalizesListInput;
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -47,23 +50,5 @@ class StorePosteRequest extends FormRequest
             'competences_requises' => $this->normalizeList('competences_requises'),
             'langues_attendues' => $this->normalizeList('langues_attendues'),
         ]);
-    }
-
-    /**
-     * @return list<string>
-     */
-    protected function normalizeList(string $key): array
-    {
-        $values = (array) $this->input($key, []);
-
-        $cleaned = array_map(
-            fn ($value) => is_string($value) ? trim($value) : $value,
-            $values,
-        );
-
-        return array_values(array_filter(
-            $cleaned,
-            fn ($value) => is_string($value) && $value !== '',
-        ));
     }
 }

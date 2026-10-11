@@ -185,8 +185,7 @@ test('a post with applications cannot be deleted', function () {
     $user = User::factory()->create();
     $poste = Poste::factory()->for($user)->create();
 
-    // Candidate n'expose pas encore de liste $fillable : on force l'insertion du jeu de test.
-    $poste->candidates()->forceCreate([
+    $poste->candidates()->create([
         'nom' => 'Alice Martin',
         'email' => 'alice@example.com',
         'annees_experience' => 3,
